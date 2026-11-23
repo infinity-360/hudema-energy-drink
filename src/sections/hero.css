@@ -1,0 +1,107 @@
+/* Hero: a lata no meio numa janela em pé (os Reels são 9:16), o título dos dois lados e o filme das latas preso à rolagem. */
+.palco { position: relative; height: calc(100svh * 3.6); }
+.hero { position: sticky; top: 0; height: 100svh; overflow: hidden; background: var(--preto); isolation: isolate; }
+
+.hero__fundo { position: absolute; inset: -8%; z-index: -2; opacity: 0.34; transition: opacity 0.8s; }
+.hero__fundo img { width: 100%; height: 100%; object-fit: cover; filter: blur(46px) saturate(1.3); }
+.hero[data-estado='fim'] .hero__fundo, .hero[data-estado='filme'] .hero__fundo { opacity: 0.12; }
+
+.hero__janela {
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  top: 0;
+  height: 100%;
+  aspect-ratio: 9 / 16;
+  transform: translateX(-50%);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 13%, #000 87%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 13%, #000 87%, transparent);
+}
+.hero__video, .hero__filme { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.hero__filme { opacity: 0; }
+
+/* título: uma palavra de cada lado da lata */
+.titulo {
+  --lado: calc((100vw - 100svh * 9 / 16) / 2);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  /* "SINTA ESSA" mede cerca de 5,6em: o corpo sai da largura livre ao lado da lata */
+  font-size: clamp(30px, calc((100vw - 100svh * 9 / 16 - 2 * var(--gutter)) / 12.4), 124px);
+  font-weight: 900;
+  font-stretch: 92%;
+  font-style: normal;
+  line-height: 0.92;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+}
+.metade {
+  position: absolute;
+  top: 50%;
+  width: var(--lado);
+  margin-top: -0.6em;
+  transform: skewX(-9deg);
+  white-space: nowrap;
+}
+.metade--esq { left: 0; padding-left: var(--gutter); text-align: left; }
+.metade--dir { right: 0; padding-right: var(--gutter); text-align: right; color: var(--sol); }
+.metade > span { transition: transform 0.45s var(--sai), opacity 0.3s; transform: translateY(115%); }
+.hero[data-estado='abre'] .metade > span { transform: none; transition: transform 1.3s var(--entra); }
+.hero[data-estado='abre'] .metade--dir > span { transition-delay: 0.08s; }
+
+.hero__base {
+  position: absolute;
+  left: var(--gutter);
+  right: var(--gutter);
+  bottom: clamp(24px, 5svh, 56px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  opacity: 0;
+  transform: translateY(16px);
+  pointer-events: none;
+  transition: opacity 0.35s, transform 0.45s var(--sai);
+}
+.hero[data-estado='abre'] .hero__base--abre,
+.hero[data-estado='fim'] .hero__base--fim {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+  transition: opacity 0.9s 0.25s, transform 1.2s 0.25s var(--entra);
+}
+.hero__lema, .hero__apoio { font-size: var(--f-lema); font-weight: 700; letter-spacing: 0.12em; line-height: 1.45; text-transform: uppercase; }
+.hero__apoio { color: var(--tinta-2); text-align: right; }
+.hero__fim-titulo {
+  font-size: clamp(30px, 3.5vw, 64px);
+  font-weight: 900;
+  font-stretch: 92%;
+  line-height: 0.98;
+  text-transform: uppercase;
+  transform: skewX(-9deg);
+}
+.hero__fim-titulo em { font-style: normal; color: var(--sol); }
+
+/* faixa quadriculada da marca */
+.xadrez {
+  height: clamp(28px, 3.4vw, 52px);
+  background: conic-gradient(#f7f5f1 25%, #000 0 50%, #f7f5f1 0 75%, #000 0) 0 0 / clamp(28px, 3.4vw, 52px) clamp(28px, 3.4vw, 52px);
+}
+
+@media (max-aspect-ratio: 4/5) {
+  .hero__janela { left: 0; width: 100%; height: 100%; aspect-ratio: auto; transform: none; -webkit-mask-image: none; mask-image: none; }
+  .hero::after { content: ''; position: absolute; z-index: -1; inset: 48% 0 0; background: linear-gradient(transparent, rgba(0, 0, 0, 0.9) 62%); pointer-events: none; }
+  .titulo { font-size: clamp(50px, 15.6vw, 92px); }
+  .metade { position: absolute; left: var(--gutter); right: auto; top: auto; width: auto; margin: 0; padding: 0; text-align: left; }
+  .metade--esq { bottom: calc(118px + 0.92em); }
+  .metade--dir { bottom: 118px; }
+  .hero__base { bottom: max(28px, env(safe-area-inset-bottom)); }
+  .hero__lema, .hero__apoio { font-size: 11px; }
+  .hero__base--fim { flex-direction: column; align-items: stretch; }
+  .hero__fim-titulo { font-size: 34px; }
+  .hero__base--fim .botao { height: 48px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .palco { height: 100svh; }
+  .metade > span, .hero__base { transition: none !important; }
+}

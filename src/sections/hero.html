@@ -1,0 +1,27 @@
+<!-- palco do topo: o Reel do splash toca em laço; rolando, as latas Zero entram quadro a quadro (canvas) até a formação final.
+     Só a imagem segue a rolagem. Os textos trocam por marcos, por tempo (motion/palco.js e hero.css). -->
+<section class="palco" id="inicio" data-palco>
+  <div class="hero" data-hero data-estado="inicio">
+    <div class="hero__fundo" aria-hidden="true"><img src="/img/splash.webp" alt="" width="720" height="1280" /></div>
+    <div class="hero__janela" aria-hidden="true">
+      <video class="hero__video" data-hero-video src="/video/splash.mp4" poster="/img/splash.webp" muted loop playsinline preload="auto" disablepictureinpicture></video>
+      <canvas class="hero__filme" data-hero-filme></canvas>
+    </div>
+
+    <h1 class="titulo" aria-label="Sinta essa energia">
+      <span class="metade metade--esq linha" aria-hidden="true"><span>Sinta essa</span></span>
+      <span class="metade metade--dir linha" aria-hidden="true"><span>Energia</span></span>
+    </h1>
+
+    <div class="hero__base hero__base--abre">
+      <p class="hero__lema">Energia para acompanhar<br />o seu ritmo</p>
+      <p class="hero__apoio">Original &amp; Zero Açúcar<br />Lata de 473 ml</p>
+    </div>
+
+    <div class="hero__base hero__base--fim">
+      <h2 class="hero__fim-titulo">Zero açúcar.<br /><em>Toda a atitude.</em></h2>
+      <a class="botao botao--cheio" href="#linhas"><i aria-hidden="true"></i><span>Conheça as linhas</span></a>
+    </div>
+  </div>
+</section>
+<div class="xadrez" aria-hidden="true"></div>

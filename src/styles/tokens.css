@@ -1,0 +1,26 @@
+/* Hudema: tokens. Preto, branco do logo, o laranja da lata e o azul da Zero. */
+:root {
+  --preto: #000;
+  --carbono: #0d0d0e;
+  --tinta: #f7f5f1;
+  --tinta-2: #a5a29c;
+  --tinta-3: #6d6a65;
+  --linha: rgba(247, 245, 241, 0.22);
+  --linha-forte: rgba(247, 245, 241, 0.6);
+
+  --sol: #ff5a14;
+  --sol-forte: #ff7a1f;
+  --azul: #169bd7;
+
+  --sans: 'Archivo Variable', 'Archivo', ui-sans-serif, system-ui, sans-serif;
+
+  --f-rotulo: clamp(11px, 0.8vw, 14px);
+  --f-lema: clamp(13px, 1.05vw, 18px);
+  --rastro: 0.16em;
+
+  --gutter: clamp(16px, 4.2vw, 84px);
+  --r-pilula: 999px;
+
+  --entra: cubic-bezier(0.16, 1, 0.3, 1);
+  --sai: cubic-bezier(0.55, 0, 0.75, 0.2);
+}
